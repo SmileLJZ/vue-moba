@@ -33,6 +33,7 @@ export default {
   methods: {
     async fetch() {
       const res = await this.$http.get("rest/items");
+      
       this.items = res.data;
     },
     remove(row) {

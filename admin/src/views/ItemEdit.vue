@@ -13,9 +13,11 @@
           :show-file-list="false"
           :on-success="afterUpload"
         >
-          <img v-if="model.icon" :src="model.icon" class="avatar">
+          <img v-if="model.icon" :src="model.icon" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
+      </el-form-item>
+      <el-form-item label="图标图片地址">
         <el-input v-model="model.icon" :value="model.icon"></el-input>
       </el-form-item>
       <el-form-item>
@@ -36,12 +38,11 @@ export default {
     };
   },
   methods: {
-    afterUpload(res){
-      this.$set(this.model, 'icon', res.url)
+    afterUpload(res) {
+      this.$set(this.model, "icon", res.url);
       // this.model.icon = res.url
     },
     async save() {
-      
       if (this.id) {
         await this.$http.put(`rest/items/${this.id}`, this.model);
       } else {

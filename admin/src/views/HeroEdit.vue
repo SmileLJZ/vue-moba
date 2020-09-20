@@ -18,12 +18,13 @@
               :show-file-list="false"
               :on-success="res => $set(model, 'avatar', res.url)"
             >
-              <img v-if="model.avatar" :src="model.avatar" class="avatar">
+              <img v-if="model.avatar" :src="model.avatar" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
+          </el-form-item>
+          <el-form-item label="头像图片地址">
             <el-input v-model="model.avatar" :value="model.avatar"></el-input>
           </el-form-item>
-
           <el-form-item label="Banner">
             <el-upload
               class="avatar-uploader"
@@ -32,12 +33,13 @@
               :show-file-list="false"
               :on-success="res => $set(model, 'banner', res.url)"
             >
-              <img v-if="model.banner" :src="model.banner" class="avatar">
+              <img v-if="model.banner" :src="model.banner" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
+          </el-form-item>
+          <el-form-item label="Banner图片地址">
             <el-input v-model="model.banner" :value="model.banner"></el-input>
           </el-form-item>
-
           <el-form-item label="类型">
             <el-select v-model="model.categories" multiple>
               <el-option
@@ -98,10 +100,12 @@
                   :show-file-list="false"
                   :on-success="res => $set(item, 'icon', res.url)"
                 >
-                  <img v-if="item.icon" :src="item.icon" class="avatar">
+                  <img v-if="item.icon" :src="item.icon" class="avatar" />
                   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
-                 <el-input v-model="item.icon" :value="item.icon"></el-input>
+              </el-form-item>
+              <el-form-item label="图标图片地址">
+                <el-input v-model="item.icon" :value="item.icon"></el-input>
               </el-form-item>
               <el-form-item label="冷却值">
                 <el-input v-model="item.delay"></el-input>
@@ -130,11 +134,11 @@
             <el-col :md="12" v-for="(item, i) in model.partners" :key="i">
               <el-form-item label="英雄">
                 <el-select filterable v-model="item.hero">
-                  <el-option 
-                  v-for="hero in heroes"
-                  :key="hero._id"
-                  :value="hero._id"
-                  :label="hero.name"
+                  <el-option
+                    v-for="hero in heroes"
+                    :key="hero._id"
+                    :value="hero._id"
+                    :label="hero.name"
                   ></el-option>
                 </el-select>
               </el-form-item>
@@ -178,11 +182,10 @@ export default {
   },
   methods: {
     async save() {
-     
       if (this.id) {
         await this.$http.put(`rest/heroes/${this.id}`, this.model);
       } else {
-         await this.$http.post("rest/heroes", this.model);
+        await this.$http.post("rest/heroes", this.model);
       }
       // this.$router.push("/heroes/list");
       this.$message({
@@ -204,6 +207,7 @@ export default {
     },
     async fetchHeroes() {
       const res = await this.$http.get(`rest/heroes`);
+      window.console.log(res.data)
       this.heroes = res.data;
     }
   },

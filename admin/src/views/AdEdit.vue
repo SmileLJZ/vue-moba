@@ -24,8 +24,11 @@
                 <img v-if="item.image" :src="item.image" class="avatar">
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
+              
             </el-form-item>
-            
+            <el-form-item label="图片地址">
+              <el-input v-model="item.image" :value="item.image"></el-input>
+            </el-form-item>
             <el-form-item>
               <el-button size="small" type="danger" @click="model.items.splice(i, 1)">删除</el-button>
             </el-form-item>
